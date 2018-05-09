@@ -15,6 +15,10 @@ public class Player : MonoBehaviour {
 
 	public string startPoint;
 
+	private bool attacking;
+	public float attackTime;
+	private float attackTimeCounter;
+
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> (); //обращение к аниматору
@@ -37,25 +41,44 @@ public class Player : MonoBehaviour {
 	void Update () {
 
 		playerMoving = false;
-		if (Input.GetAxisRaw ("Horizontal") > 0.5f || Input.GetAxisRaw ("Horizontal") < -0.5f) {
-			myRigidbody.velocity = new Vector2 (Input.GetAxisRaw ("Horizontal") * moveSpeed, myRigidbody.velocity.y);
-			playerMoving = true;
-			lastMove = new Vector2 (Input.GetAxisRaw ("Horizontal"), 0f);
-		}
-		if (Input.GetAxisRaw ("Vertical") > 0.5f || Input.GetAxisRaw ("Vertical") < -0.5f) {
-			myRigidbody.velocity = new Vector2 (myRigidbody.velocity.x,Input.GetAxisRaw ("Vertical") * moveSpeed);
-			playerMoving = true;
-			lastMove = new Vector2 (0f, Input.GetAxisRaw ("Vertical"));
-		}
+
+		if (!attacking) {
+			if (Input.GetAxisRaw ("Horizontal") > 0.5f || Input.GetAxisRaw ("Horizontal") < -0.5f) {
+				myRigidbody.velocity = new Vector2 (Input.GetAxisRaw ("Horizontal") * moveSpeed, myRigidbody.velocity.y);
+				playerMoving = true;
+				lastMove = new Vector2 (Input.GetAxisRaw ("Horizontal"), 0f);
+			}
+			if (Input.GetAxisRaw ("Vertical") > 0.5f || Input.GetAxisRaw ("Vertical") < -0.5f) {
+				myRigidbody.velocity = new Vector2 (myRigidbody.velocity.x, Input.GetAxisRaw ("Vertical") * moveSpeed);
+				playerMoving = true;
+				lastMove = new Vector2 (0f, Input.GetAxisRaw ("Vertical"));
+			}
 			
-		if (Input.GetAxisRaw ("Horizontal") < 0.5f && Input.GetAxisRaw ("Horizontal") > -0.5f) 
-		{
-			myRigidbody.velocity = new Vector2 (0f, myRigidbody.velocity.y);
+			if (Input.GetAxisRaw ("Horizontal") < 0.5f && Input.GetAxisRaw ("Horizontal") > -0.5f) {
+				myRigidbody.velocity = new Vector2 (0f, myRigidbody.velocity.y);
+			}
+
+			if (Input.GetAxisRaw ("Vertical") < 0.5f && Input.GetAxisRaw ("Vertical") > -0.5f) {
+				myRigidbody.velocity = new Vector2 (myRigidbody.velocity.x, 0f);
+			}
+
+			if (Input.GetKeyDown (KeyCode.J)) {
+				attackTimeCounter = attackTime;
+				attacking = true;
+				myRigidbody.velocity = Vector2.zero;
+				anim.SetBool ("Attack", true);
+			}
 		}
 
-		if (Input.GetAxisRaw ("Vertical") < 0.5f && Input.GetAxisRaw ("Vertical") > -0.5f)
+		if (attackTimeCounter > 0) 
 		{
-			myRigidbody.velocity = new Vector2 (myRigidbody.velocity.x, 0f);
+			attackTimeCounter -= Time.deltaTime;
+		}
+
+		if (attackTimeCounter <= 0) 
+		{
+			attacking = false;
+			anim.SetBool ("Attack", false);
 		}
 
 		anim.SetFloat ("MoveX", Input.GetAxisRaw ("Horizontal"));
