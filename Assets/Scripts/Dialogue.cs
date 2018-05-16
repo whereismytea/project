@@ -8,10 +8,10 @@ public class Dialogue : MonoBehaviour {
 	public GameObject dBox;
 	public Text dText;
 
-	public bool dialogueActive = false;
+	public bool dialogueActive;
 
 	public string[] dialogLines;
-	public int currentLine = 0;
+	public int currentLine;
 
 	// Use this for initialization
 	void Start () {
@@ -19,27 +19,24 @@ public class Dialogue : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {		
-		if (currentLine >= dialogLines.Length) 
+	void Update () {
+		if (dialogueActive && Input.GetKeyUp(KeyCode.Space))
+			
 		{
+			//dBox.SetActive (false);
+			//dialogueActive = false;
+
+			currentLine++;
+		}
+
+		if (currentLine >= dialogLines.Length) {
 			dBox.SetActive (false);
 			dialogueActive = false;
 
 			currentLine = 0;
 		}
-
-		if (dialogueActive)
-		{
-			if (Input.GetKeyUp(KeyCode.Space))
-			{
-				currentLine++;
-			}
-			//dBox.SetActive (false);
-			//dialogueActive = false;
-			dText.text = dialogLines[currentLine];
+			dText.text = dialogLines [currentLine];
 		}
-
-	}
 
 	public void ShowBox(string dialogue)
 	{

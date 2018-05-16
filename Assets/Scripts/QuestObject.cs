@@ -11,6 +11,11 @@ public class QuestObject : MonoBehaviour {
 	public string startText;
 	public string endText;
 
+	public bool isEnemyQuest;
+	public string targetEnemy;
+	public int enemiesToKill;
+	private int enemyKillCount;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -18,6 +23,19 @@ public class QuestObject : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (isEnemyQuest) 
+		{
+			if (theQM.enemyKilled == targetEnemy) 
+			{
+				theQM.enemyKilled = null;
+				enemyKillCount++;
+			}
+
+			if (enemyKillCount >= enemiesToKill) 
+			{
+				EndQuest ();
+			}
+		}
 		
 	}
 
