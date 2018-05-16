@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114606902921524234}
   - component: {fileID: 114065222188227718}
   - component: {fileID: 114089523501410368}
+  - component: {fileID: 132783277163396816}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Enemy
@@ -139,6 +140,29 @@ MonoBehaviour:
   timeBetweenMove: 2
   timeToMove: 1
   waitToReload: 2
+--- !u!132 &132783277163396816
+GUIText:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1095218685829982}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Text: vbv
+  m_Anchor: 2
+  m_Alignment: 0
+  m_PixelOffset: {x: 0.88, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 0}
+  m_Material: {fileID: 0}
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_PixelCorrect: 1
+  m_RichText: 1
 --- !u!212 &212617182300819552
 SpriteRenderer:
   m_ObjectHideFlags: 1
