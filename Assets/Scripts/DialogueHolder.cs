@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueHolder : MonoBehaviour {
 
 	public string dialogue;
 	private Dialogue dMan;
-
+	private Button dbutton;
 	public string[] dialogueLines;
-
 	// Use this for initialization
 	void Start () {
+		dbutton = GameObject.Find ("dialogueButton").GetComponent<Button> ();
+
 		dMan = FindObjectOfType<Dialogue> ();
 	}
 	
@@ -23,17 +25,22 @@ public class DialogueHolder : MonoBehaviour {
 	{
 		if(other.gameObject.name == "Player")
 		{
-			if (Input.GetKeyUp(KeyCode.Space)) 
-			{
-				//dMan.ShowBox(dialogue);
-
-				if (!dMan.dialogueActive) 
-				{
+			dbutton.onClick.AddListener (() => {
+				if (!dMan.dialogueActive) {
 					dMan.dialogLines = dialogueLines;
 					dMan.currentLine = -1;
 					dMan.ShowDialogue ();
 				}
-			}
+			});
 	}
   }
+
+	void OnTriggerExit2D(Collider2D other)
+	{
+		if(other.gameObject.name == "Player")
+		{
+			dbutton.onClick.RemoveAllListeners ();
+		}
+	}
+
 }

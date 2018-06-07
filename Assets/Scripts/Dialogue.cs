@@ -13,9 +13,11 @@ public class Dialogue : MonoBehaviour {
 	public string[] dialogLines;
 	public int currentLine = 0;
 
+	//private Button dbutton;
 	// Use this for initialization
 	void Start () {
-		
+		//dbutton = GameObject.Find ("skipDialogue").GetComponent<Button> ();
+
 	}
 	
 	// Update is called once per frame
@@ -24,21 +26,10 @@ public class Dialogue : MonoBehaviour {
 		{
 			dBox.SetActive (false);
 			dialogueActive = false;
-
+			//dbutton.onClick.RemoveAllListeners ();
 			currentLine = 0;
 		}
-
-		if (dialogueActive)
-		{
-			if (Input.GetKeyUp(KeyCode.Space))
-			{
-				currentLine++;
-			}
-			//dBox.SetActive (false);
-			//dialogueActive = false;
-			dText.text = dialogLines[currentLine];
-		}
-
+			
 	}
 
 	public void ShowBox(string dialogue)
@@ -53,4 +44,11 @@ public class Dialogue : MonoBehaviour {
 		dialogueActive = true;
 		dBox.SetActive (true);
 	}
+
+	public void Skip(){
+		Debug.Log("clicked");
+		currentLine++;
+		dText.text = dialogLines [currentLine];
+	}
+		
 }

@@ -23,6 +23,8 @@ public class PlayerHealthManager : MonoBehaviour {
 		if (playerCurrentHealth <= 0) {
 
 			sfxMan.playerDead.Play ();
+			playerCurrentHealth = playerMaxHealth;
+			Destroy (GameObject.Find ("BGM"));
 			SceneManager.LoadScene ("menu");
 
 
