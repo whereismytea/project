@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aabad27a877787c4a9320b0d02f7fe24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageToGive: 25
+  damageToGive: 30
 --- !u!114 &114089523501410368
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cc2c2543cf5e524a8ab71270fc0744d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 15
+  MaxHealth: 25
   CurrentHealth: 0
   expToGive: 25
   enemyQuestName: SlimeRed

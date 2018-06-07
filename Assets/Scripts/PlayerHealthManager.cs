@@ -8,10 +8,12 @@ public class PlayerHealthManager : MonoBehaviour {
 	public int playerMaxHealth;
 	public int playerCurrentHealth;
 
+	private SFXManager sfxMan;
 	// Use this for initialization
 	void Start () {
 
 		playerCurrentHealth = playerMaxHealth;
+		sfxMan = FindObjectOfType<SFXManager> ();
 		
 	}
 	
@@ -19,7 +21,10 @@ public class PlayerHealthManager : MonoBehaviour {
 	void Update () {
 
 		if (playerCurrentHealth <= 0) {
+
+			sfxMan.playerDead.Play ();
 			SceneManager.LoadScene ("menu");
+
 
 		}
 	}
@@ -27,6 +32,8 @@ public class PlayerHealthManager : MonoBehaviour {
 	public void HurtPlayer(int damageToGive)
 	{
 		playerCurrentHealth -= damageToGive;
+
+		sfxMan.playerHurt.Play ();
 
 	}
 

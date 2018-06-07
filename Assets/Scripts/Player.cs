@@ -19,10 +19,13 @@ public class Player : MonoBehaviour {
 	public float attackTime;
 	private float attackTimeCounter;
 
+	private SFXManager sfxMan;
+
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> (); //обращение к аниматору
 		myRigidbody = GetComponent<Rigidbody2D> ();
+		sfxMan = FindObjectOfType<SFXManager> ();
 
 		if (!playerExists) {
 			playerExists = true;
@@ -67,6 +70,9 @@ public class Player : MonoBehaviour {
 				attacking = true;
 				myRigidbody.velocity = Vector2.zero;
 				anim.SetBool ("Attack", true);
+
+				sfxMan.playerAttack.Play ();
+
 			}
 		}
 
