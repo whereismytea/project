@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HurtEnemy : MonoBehaviour {
 
 	public int damageToGive;
-	private int currentDamage;
+	public int currentDamage;
 	public GameObject damageBurst;
 
 	private PlayerStats thePS;
@@ -37,7 +37,7 @@ public class HurtEnemy : MonoBehaviour {
 		if (other.gameObject.tag == "Enemy") {
 			//Destroy (other.gameObject); 
 			currentDamage = damageToGive + thePS.currentAttack; 
-			other.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(damageToGive);
+			other.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(currentDamage);
 			Instantiate (damageBurst, GameObject.Find("swing big").transform.position, GameObject.Find("swing big").transform.rotation);
 			damageInfo.enabled = true;
 			damageInfo.text = "-" + currentDamage.ToString ();

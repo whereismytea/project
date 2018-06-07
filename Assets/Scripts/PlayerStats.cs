@@ -24,9 +24,9 @@ public class PlayerStats : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		currentHP = HPLevels [1];
-		currentAttack = attackLevels [1];
-		currentDefence = defenceLevels [1];
+		currentHP = HPLevels [0];
+		currentAttack = attackLevels [0];
+		currentDefence = defenceLevels [0];
 
 		thePlayerHealth = FindObjectOfType<PlayerHealthManager> ();
 		
@@ -34,7 +34,7 @@ public class PlayerStats : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (currentExp >= toLevelUp[currentLevel])
+		if (currentLevel < toLevelUp.Length && currentExp >= toLevelUp[currentLevel])
 		{
 			//currentLevel++;
 
@@ -57,6 +57,7 @@ public class PlayerStats : MonoBehaviour {
 
 		currentAttack = attackLevels [currentLevel];
 		currentDefence = defenceLevels [currentLevel];
+		Debug.Log ("you leveled up to Level " + currentLevel);
 	}
 
 }
